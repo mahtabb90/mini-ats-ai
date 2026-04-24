@@ -1,55 +1,57 @@
-import { useNavigate } from "react-router-dom";
-import { supabase } from "../lib/supabase";
-
 export default function DashboardPage({ session }) {
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
-  };
+  const cards = [
+    {
+      title: "Jobs",
+      description: "Create and manage open positions.",
+      href: "/jobs",
+      icon: "💼",
+    },
+    {
+      title: "Candidates",
+      description: "Add candidate profiles and connect them to jobs.",
+      href: "/candidates",
+      icon: "👤",
+    },
+    {
+      title: "Kanban",
+      description: "Track candidates through the hiring pipeline.",
+      href: "/kanban",
+      icon: "📊",
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold">Dashboard</h1>
-            <p className="text-gray-600 mt-2">
-              Logged in as: {session?.user?.email}
-            </p>
-          </div>
+    <div>
+      <div className="mb-8">
+        <p className="text-sm font-medium text-blue-600 mb-2">
+          Welcome back
+        </p>
+        <h1 className="text-4xl font-bold text-gray-900">Dashboard</h1>
+        <p className="text-gray-500 mt-2">
+          Logged in as {session?.user?.email}
+        </p>
+      </div>
 
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+      <div className="grid gap-6 md:grid-cols-3">
+        {cards.map((card) => (
+          <a
+            key={card.title}
+            href={card.href}
+            className="group bg-white rounded-3xl p-6 shadow-md border border-gray-100 hover:-translate-y-1 hover:shadow-xl transition"
           >
-            Logout
-          </button>
-        </div>
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-2xl mb-5">
+              {card.icon}
+            </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
-          <div className="bg-gray-50 rounded-lg p-4 border">
-            <h2 className="font-semibold mb-2">Jobs</h2>
-            <p className="text-sm text-gray-600">
-              Manage open positions and hiring needs.
-            </p>
-          </div>
+            <h2 className="text-xl font-semibold text-gray-900 group-hover:text-blue-700">
+              {card.title}
+            </h2>
 
-          <div className="bg-gray-50 rounded-lg p-4 border">
-            <h2 className="font-semibold mb-2">Candidates</h2>
-            <p className="text-sm text-gray-600">
-              Track candidate profiles and progress.
+            <p className="text-gray-500 mt-2 leading-relaxed">
+              {card.description}
             </p>
-          </div>
-
-          <div className="bg-gray-50 rounded-lg p-4 border">
-            <h2 className="font-semibold mb-2">Kanban</h2>
-            <p className="text-sm text-gray-600">
-              View candidate pipeline by status.
-            </p>
-          </div>
-        </div>
+          </a>
+        ))}
       </div>
     </div>
   );

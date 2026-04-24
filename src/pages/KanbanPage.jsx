@@ -101,18 +101,21 @@ export default function KanbanPage() {
         </select>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-4">
         {STATUSES.map((status) => (
           <div
             key={status}
-            className="bg-white rounded-2xl shadow-md border border-gray-100 p-4 min-h-[400px]"
+            className="bg-white rounded-3xl shadow-md border border-gray-100 p-4 flex flex-col max-h-[600px]"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-bold text-gray-800">{status}</h2>
-              <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusStyle(status)}`}>
-                {groupedCandidates[status]?.length || 0}
-              </span>
-            </div>
+            <div className="flex items-center justify-between mb-4 sticky top-0 bg-white z-10 py-2">
+  <h2 className="font-semibold text-gray-800">{status}</h2>
+
+  <span
+    className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusStyle(status)}`}
+  >
+    {groupedCandidates[status]?.length || 0}
+  </span>
+</div>
 
             <div className="grid gap-4">
               {groupedCandidates[status]?.map((candidate) => (

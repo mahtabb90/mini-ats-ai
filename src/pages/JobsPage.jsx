@@ -44,16 +44,17 @@ export default function JobsPage({ session }) {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-800">
-            Jobs
-          </h1>
-          <p className="text-gray-500 mt-2">
-            Manage your job listings and hiring pipeline
-          </p>
-        </div>
+  <p className="text-sm font-medium text-blue-600 mb-2">
+    Job management
+  </p>
+  <h1 className="text-4xl font-bold text-gray-900">Jobs</h1>
+  <p className="text-gray-500 mt-2">
+    Create and manage open positions for your hiring pipeline.
+  </p>
+</div>
 
         {/* Form */}
-        <div className="bg-white p-6 rounded-2xl shadow-lg mb-10 border border-gray-100">
+        <div className="bg-white p-6 rounded-3xl shadow-md hover:shadow-xl hover:-translate-y-1 transition border border-gray-100">
           <form onSubmit={handleCreateJob} className="grid gap-4">
 
             <input
