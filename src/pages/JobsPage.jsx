@@ -13,12 +13,7 @@ export default function JobsPage({ session }) {
       .select("*")
       .order("created_at", { ascending: false });
 
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    setJobs(data);
+    if (!error) setJobs(data);
   };
 
   const handleCreateJob = async (e) => {
@@ -31,15 +26,12 @@ export default function JobsPage({ session }) {
       created_by: session.user.id,
     });
 
-    if (error) {
-      alert(error.message);
-      return;
+    if (!error) {
+      setTitle("");
+      setCompany("");
+      setDescription("");
+      fetchJobs();
     }
-
-    setTitle("");
-    setCompany("");
-    setDescription("");
-    fetchJobs();
   };
 
   useEffect(() => {
@@ -47,46 +39,73 @@ export default function JobsPage({ session }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6">
-        <h1 className="text-3xl font-bold mb-6">Jobs</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 p-6">
+      <div className="max-w-5xl mx-auto">
 
-        <form onSubmit={handleCreateJob} className="grid gap-4 mb-8">
-          <input
-            className="border rounded-lg px-3 py-2"
-            placeholder="Job title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-800">
+            Jobs
+          </h1>
+          <p className="text-gray-500 mt-2">
+            Manage your job listings and hiring pipeline
+          </p>
+        </div>
 
-          <input
-            className="border rounded-lg px-3 py-2"
-            placeholder="Company"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-          />
+        {/* Form */}
+        <div className="bg-white p-6 rounded-2xl shadow-lg mb-10 border border-gray-100">
+          <form onSubmit={handleCreateJob} className="grid gap-4">
 
-          <textarea
-            className="border rounded-lg px-3 py-2"
-            placeholder="Job description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+            <input
+              className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-xl px-4 py-3 outline-none transition"
+              placeholder="Job title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
 
-          <button className="bg-blue-600 text-white py-2 rounded-lg">
-            Create job
-          </button>
-        </form>
+            <input
+              className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-xl px-4 py-3 outline-none transition"
+              placeholder="Company"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
 
-        <div className="grid gap-4">
+            <textarea
+              className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-xl px-4 py-3 outline-none transition"
+              placeholder="Job description"
+              rows={3}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+
+            <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-medium shadow-md hover:scale-[1.02] hover:shadow-lg transition">
+              Create job
+            </button>
+          </form>
+        </div>
+
+        {/* Job list */}
+        <div className="grid gap-6">
           {jobs.map((job) => (
-            <div key={job.id} className="border rounded-lg p-4">
-              <h2 className="font-bold text-xl">{job.title}</h2>
-              <p className="text-gray-600">{job.company}</p>
-              <p className="mt-2">{job.description}</p>
+            <div
+              key={job.id}
+              className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition border border-gray-100"
+            >
+              <h2 className="text-xl font-semibold text-gray-800">
+                {job.title}
+              </h2>
+
+              <p className="text-blue-600 font-medium mt-1">
+                {job.company}
+              </p>
+
+              <p className="text-gray-600 mt-3 leading-relaxed">
+                {job.description}
+              </p>
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );

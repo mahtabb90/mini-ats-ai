@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage";
 import JobsPage from "./pages/JobsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { supabase } from "./lib/supabase";
+import Layout from "./components/Layout";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -34,24 +35,27 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+<Route
+  path="/dashboard"
+  element={
+    <ProtectedRoute session={session}>
+      <Layout session={session}>
+        <DashboardPage session={session} />
+      </Layout>
+    </ProtectedRoute>
+  }
+/>
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute session={session}>
-              <DashboardPage session={session} />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/jobs"
-          element={
-            <ProtectedRoute session={session}>
-              <JobsPage session={session} />
-            </ProtectedRoute>
-          }
-        />
+<Route
+  path="/jobs"
+  element={
+    <ProtectedRoute session={session}>
+      <Layout session={session}>
+        <JobsPage session={session} />
+      </Layout>
+    </ProtectedRoute>
+  }
+/>
       </Routes>
     </BrowserRouter>
   );
