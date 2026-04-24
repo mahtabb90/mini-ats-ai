@@ -6,6 +6,7 @@ import JobsPage from "./pages/JobsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { supabase } from "./lib/supabase";
 import Layout from "./components/Layout";
+import CandidatesPage from "./pages/CandidatesPage";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -52,6 +53,16 @@ function App() {
     <ProtectedRoute session={session}>
       <Layout session={session}>
         <JobsPage session={session} />
+      </Layout>
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/candidates"
+  element={
+    <ProtectedRoute session={session}>
+      <Layout session={session}>
+        <CandidatesPage session={session} />
       </Layout>
     </ProtectedRoute>
   }
