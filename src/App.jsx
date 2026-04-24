@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { supabase } from "./lib/supabase";
 import Layout from "./components/Layout";
 import CandidatesPage from "./pages/CandidatesPage";
+import KanbanPage from "./pages/KanbanPage";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -63,6 +64,16 @@ function App() {
     <ProtectedRoute session={session}>
       <Layout session={session}>
         <CandidatesPage session={session} />
+      </Layout>
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/kanban"
+  element={
+    <ProtectedRoute session={session}>
+      <Layout session={session}>
+        <KanbanPage />
       </Layout>
     </ProtectedRoute>
   }

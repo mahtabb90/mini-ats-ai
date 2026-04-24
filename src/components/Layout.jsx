@@ -33,6 +33,9 @@ export default function Layout({ session, children }) {
             <Link to="/candidates" className="text-gray-600 hover:text-blue-600">
   Candidates
 </Link>
+           <Link to="/kanban" className="text-gray-600 hover:text-blue-600">
+  Kanban
+</Link>
 
             <button
               onClick={handleLogout}
