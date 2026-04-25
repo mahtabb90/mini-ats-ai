@@ -8,6 +8,7 @@ import { supabase } from "./lib/supabase";
 import Layout from "./components/Layout";
 import CandidatesPage from "./pages/CandidatesPage";
 import KanbanPage from "./pages/KanbanPage";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -74,6 +75,17 @@ function App() {
     <ProtectedRoute session={session}>
       <Layout session={session}>
         <KanbanPage />
+      </Layout>
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/admin"
+  element={
+    <ProtectedRoute session={session}>
+      <Layout session={session}>
+        <AdminPage />
       </Layout>
     </ProtectedRoute>
   }
