@@ -45,6 +45,10 @@ export default function Layout({ children }) {
               Kanban
             </Link>
 
+            <Link to="/admin" className={navLinkClass("/admin")}>
+              Admin
+            </Link>
+
             <button
               onClick={handleLogout}
               className="ml-3 bg-gray-900 text-white px-5 py-2 rounded-xl text-sm font-medium hover:bg-gray-700 transition shadow-sm"
