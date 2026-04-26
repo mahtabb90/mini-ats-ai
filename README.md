@@ -6,14 +6,14 @@ A modern fullstack Applicant Tracking System built with React, Supabase, and app
 
 ## ✨ Features
 
-- 🔐 Authentication with Supabase
-- 💼 Job management system
-- 👤 Candidate profiles (LinkedIn, CV summary)
-- 📊 Kanban recruitment pipeline
-- 🔎 Filtering (by job & candidate name)
-- 🤖 AI match scoring (MVP)
-- 👑 Admin panel (create users securely)
-- ☁️ Cloud-ready architecture
+- 🔐 Authentication with Supabase  
+- 💼 Job management system  
+- 👤 Candidate profiles (LinkedIn, CV summary)  
+- 📊 Kanban recruitment pipeline  
+- 🔎 Filtering (by job & candidate name)  
+- 🤖 AI match scoring (MVP)  
+- 👑 Admin panel (create users securely)  
+- ☁️ Cloud-ready architecture  
 
 ---
 
@@ -25,122 +25,123 @@ React → Supabase (Auth + DB) → Edge Functions → AI Scoring Logic
 
 ## 🌍 Live Demo
 
-Frontend: *(add your link here later)*  
-Backend: Supabase  
+- Frontend: *(add your link here later)*  
+- Backend: Supabase  
 
 ---
 
 ## ⚙️ Local Setup
 
-### Clone repo
-```bash
-git clone https://github.com/your-username/mini-ats.git
-cd mini-ats
+### 1. Clone repository
+
+git clone https://github.com/your-username/mini-ats.git  
+cd mini-ats  
+
+### 2. Install dependencies
+
+npm install  
+
+### 3. Environment variables
+
+Create a `.env` file in the root:
+
+VITE_SUPABASE_URL=your_project_url  
+VITE_SUPABASE_ANON_KEY=your_anon_key  
+
+### 4. Run application
+
+npm run dev  
 
 ---
 
-Install dependencies
-npm install
-
----
-
-Environment variables
-
-Create a .env file in the root:
-
-VITE_SUPABASE_URL=your_project_url
-VITE_SUPABASE_ANON_KEY=your_anon_key
-
----
-
-Run app
-npm run dev
-
----
-
-🧠 AI Scoring (MVP)
+## 🧠 AI Scoring (MVP)
 
 Simple rule-based AI system:
 
-.Compares job description with candidate notes
-.Extracts matching keywords
-.Generates:
-.Score (0–100)
-.Matched skills summary
+- Compares job description with candidate notes  
+- Extracts matching keywords  
+- Generates:
+  - Score (0–100)
+  - Matched skills summary  
 
 Example:
 
 AI Score: 24/100  
-Matched skills: react, ai
+Matched skills: react, ai  
 
 ---
 
-📊 Kanban Workflow
-Applied
-Interview
-Offer
-Rejected
+## 📊 Kanban Workflow
 
-✔ Clean visual pipeline
-✔ Status dropdown per candidate
-✔ Real-time updates via Supabase
+- Applied  
+- Interview  
+- Offer  
+- Rejected  
 
----
-
-👤 Admin Panel
-Create users (admin & customer)
-Uses Supabase Edge Function
-Secure (service_role key hidden)
+✔ Clean visual pipeline  
+✔ Status dropdown per candidate  
+✔ Real-time updates via Supabase  
 
 ---
 
-🔐 Security
-No service_role key exposed in frontend
-Edge Functions handle sensitive logic
-Role-based access via profiles table
+## 👤 Admin Panel
+
+- Create users (admin & customer)  
+- Uses Supabase Edge Functions  
+- Secure (service_role key hidden)  
 
 ---
 
-📦 MVP Assumptions
-Admin creates accounts
-Customers use same interface
-AI is rule-based (not ML yet)
-No CV upload (text-based only)
-Single-tenant system
+## 🔐 Security
+
+- No service_role key exposed in frontend  
+- Edge Functions handle sensitive logic  
+- Role-based access via profiles table  
 
 ---
 
-🚀 Future Improvements
-Drag & drop Kanban
-CV parsing (PDF)
-LLM integration (OpenAI / Claude)
-Skill extraction & embeddings
-Multi-tenant support
-Analytics dashboard
+## 📦 MVP Assumptions
+
+- Admin creates accounts  
+- Customers use same interface  
+- AI is rule-based (not ML yet)  
+- No CV upload (text-based only)  
+- Single-tenant system  
 
 ---
 
-🎬 Demo
+## 🚀 Future Improvements
+
+- Drag & drop Kanban  
+- CV parsing (PDF)  
+- LLM integration (OpenAI / Claude)  
+- Skill extraction & embeddings  
+- Multi-tenant support  
+- Analytics dashboard  
+
+---
+
+## 🎬 Demo
 
 Demo video includes:
 
-Login
-Job creation
-Candidate management
-Kanban workflow
-AI scoring
-Admin panel
+- Login  
+- Job creation  
+- Candidate management  
+- Kanban workflow  
+- AI scoring  
+- Admin panel  
 
 ---
 
-👩‍💻 Author
+## 👩‍💻 Author
 
-Mahtab Nezam
-AI Developer Student
-Fullstack + Applied AI focus
+**Mahtab Nezam**  
+AI Developer Student  
+Fullstack + Applied AI focus  
 
 ---
 
-⭐ Final Note
+## ⭐ Final Note
 
 This project demonstrates a complete fullstack system with an extensible AI layer, designed as a real-world MVP with clear scalability toward advanced AI solutions.
