@@ -25,7 +25,7 @@ React → Supabase (Auth + DB) → Edge Functions → AI Scoring Logic
 
 ## 🌍 Live Demo
 
-- Frontend: *(add your link here later)*  
+- Frontend: https://mini-ats-ai.onrender.com
 - Backend: Supabase  
 
 ---
@@ -34,7 +34,7 @@ React → Supabase (Auth + DB) → Edge Functions → AI Scoring Logic
 
 ### 1. Clone repository
 
-git clone https://github.com/your-username/mini-ats.git  
+git clone https://github.com/mahtabb90/mini-ats-ai.git 
 cd mini-ats  
 
 ### 2. Install dependencies
@@ -45,8 +45,8 @@ npm install
 
 Create a `.env` file in the root:
 
-VITE_SUPABASE_URL=your_project_url  
-VITE_SUPABASE_ANON_KEY=your_anon_key  
+VITE_SUPABASE_URL=https://zehszxnlgrwcpenevxoe.supabase.co 
+VITE_SUPABASE_ANON_KEY=sb_publishable_whOFmSqOuBPclrMGV2cI0Q_aZMgvT-U 
 
 ### 4. Run application
 
