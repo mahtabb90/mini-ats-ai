@@ -143,6 +143,15 @@ export default function KanbanPage() {
                     </a>
                   )}
 
+                  <div className="mt-3 bg-purple-50 border border-purple-100 rounded-xl p-3">
+  <p className="text-xs font-semibold text-purple-700">
+    AI Score: {candidate.ai_score ?? 0}/100
+  </p>
+  <p className="text-xs text-purple-600 mt-1 line-clamp-2">
+    {candidate.ai_summary || "No AI summary available"}
+  </p>
+</div>
+
                   <p className="text-sm text-gray-600 mt-3 line-clamp-3">
                     {candidate.notes}
                   </p>

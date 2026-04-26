@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { calculateMatchScore } from "../utils/matchScore";
 
 export default function CandidatesPage({ session }) {
   const [jobs, setJobs] = useState([]);
@@ -19,9 +20,9 @@ export default function CandidatesPage({ session }) {
 
   const fetchCandidates = async () => {
     const { data, error } = await supabase
-      .from("candidates")
-      .select("*, jobs(title)")
-      .order("created_at", { ascending: false });
+  .from("candidates")
+  .select("*, jobs(title, description)")
+  .order("created_at", { ascending: false });
 
     if (error) {
       alert(error.message);
@@ -34,6 +35,13 @@ export default function CandidatesPage({ session }) {
   const handleCreateCandidate = async (e) => {
     e.preventDefault();
 
+const selectedJob = jobs.find((job) => job.id === jobId);
+
+const aiResult = calculateMatchScore(
+  selectedJob?.description || "",
+  notes
+);
+
     const { error } = await supabase.from("candidates").insert({
       full_name: fullName,
       email,
@@ -42,6 +50,8 @@ export default function CandidatesPage({ session }) {
       job_id: jobId,
       status, 
       created_by: session.user.id,
+      ai_score: aiResult.score,
+      ai_summary: aiResult.summary,
     });
 
     if (error) {
@@ -161,6 +171,15 @@ export default function CandidatesPage({ session }) {
   {candidate.status}
 </span>
             </div>
+
+            <div className="mt-4 bg-purple-50 border border-purple-100 rounded-2xl p-3">
+  <p className="text-sm font-semibold text-purple-700">
+    AI Match Score: {candidate.ai_score ?? 0}/100
+  </p>
+  <p className="text-sm text-purple-600 mt-1">
+    {candidate.ai_summary || "No AI summary available"}
+  </p>
+</div>
 
             {candidate.linkedin_url && (
               <a
