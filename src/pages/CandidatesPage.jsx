@@ -20,9 +20,9 @@ export default function CandidatesPage({ session }) {
 
   const fetchCandidates = async () => {
     const { data, error } = await supabase
-  .from("candidates")
-  .select("*, jobs(title, description)")
-  .order("created_at", { ascending: false });
+      .from("candidates")
+      .select("*, jobs(title, description)")
+      .order("created_at", { ascending: false });
 
     if (error) {
       alert(error.message);
@@ -32,15 +32,35 @@ export default function CandidatesPage({ session }) {
     setCandidates(data || []);
   };
 
+  const handleDeleteCandidate = async (candidateId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this candidate?"
+    );
+
+    if (!confirmDelete) return;
+
+    const { error } = await supabase
+      .from("candidates")
+      .delete()
+      .eq("id", candidateId);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    fetchCandidates();
+  };
+
   const handleCreateCandidate = async (e) => {
     e.preventDefault();
 
-const selectedJob = jobs.find((job) => job.id === jobId);
+    const selectedJob = jobs.find((job) => job.id === jobId);
 
-const aiResult = calculateMatchScore(
-  selectedJob?.description || "",
-  notes
-);
+    const aiResult = calculateMatchScore(
+      selectedJob?.description || "",
+      notes
+    );
 
     const { error } = await supabase.from("candidates").insert({
       full_name: fullName,
@@ -48,7 +68,7 @@ const aiResult = calculateMatchScore(
       linkedin_url: linkedinUrl,
       notes,
       job_id: jobId,
-      status, 
+      status,
       created_by: session.user.id,
       ai_score: aiResult.score,
       ai_summary: aiResult.summary,
@@ -64,6 +84,7 @@ const aiResult = calculateMatchScore(
     setLinkedinUrl("");
     setNotes("");
     setJobId("");
+    setStatus("Applied");
     fetchCandidates();
   };
 
@@ -71,6 +92,13 @@ const aiResult = calculateMatchScore(
     fetchJobs();
     fetchCandidates();
   }, []);
+
+  const getStatusStyle = (candidateStatus) => {
+    if (candidateStatus === "Applied") return "bg-gray-100 text-gray-700";
+    if (candidateStatus === "Interview") return "bg-blue-100 text-blue-700";
+    if (candidateStatus === "Offer") return "bg-green-100 text-green-700";
+    return "bg-red-100 text-red-700";
+  };
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -103,16 +131,18 @@ const aiResult = calculateMatchScore(
             value={linkedinUrl}
             onChange={(e) => setLinkedinUrl(e.target.value)}
           />
+
           <select
-  className="border border-gray-200 rounded-xl px-4 py-3"
-  value={status}
-  onChange={(e) => setStatus(e.target.value)}
->
-  <option>Applied</option>
-  <option>Interview</option>
-  <option>Offer</option>
-  <option>Rejected</option>
-</select>
+            className="border border-gray-200 rounded-xl px-4 py-3"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option>Applied</option>
+            <option>Interview</option>
+            <option>Offer</option>
+            <option>Rejected</option>
+          </select>
+
           <select
             className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-xl px-4 py-3 outline-none transition"
             value={jobId}
@@ -146,40 +176,45 @@ const aiResult = calculateMatchScore(
             key={candidate.id}
             className="bg-white p-6 rounded-2xl shadow-md border border-gray-100"
           >
-            <div className="flex justify-between gap-4">
+            <div className="flex justify-between items-start gap-4">
               <div>
                 <h2 className="text-xl font-semibold text-gray-800">
                   {candidate.full_name}
                 </h2>
+
                 <p className="text-gray-500">{candidate.email}</p>
+
                 <p className="text-blue-600 font-medium mt-1">
                   Job: {candidate.jobs?.title || "No job selected"}
                 </p>
               </div>
 
-   <span
-  className={`w-20 h-20 flex items-center justify-center rounded-full text-sm font-medium ${
-    candidate.status === "Applied"
-      ? "bg-gray-100 text-gray-700"
-      : candidate.status === "Interview"
-      ? "bg-blue-100 text-blue-700"
-      : candidate.status === "Offer"
-      ? "bg-green-100 text-green-700"
-      : "bg-red-100 text-red-700"
-  }`}
->
-  {candidate.status}
-</span>
+              <div className="flex flex-col items-end gap-3">
+                <span
+                  className={`w-20 h-20 flex items-center justify-center rounded-full text-sm font-medium text-center ${getStatusStyle(
+                    candidate.status
+                  )}`}
+                >
+                  {candidate.status}
+                </span>
+
+                <button
+                  onClick={() => handleDeleteCandidate(candidate.id)}
+                  className="bg-red-50 text-red-600 px-3 py-1 rounded-lg text-xs font-medium hover:bg-red-100 transition"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
 
             <div className="mt-4 bg-purple-50 border border-purple-100 rounded-2xl p-3">
-  <p className="text-sm font-semibold text-purple-700">
-    AI Match Score: {candidate.ai_score ?? 0}/100
-  </p>
-  <p className="text-sm text-purple-600 mt-1">
-    {candidate.ai_summary || "No AI summary available"}
-  </p>
-</div>
+              <p className="text-sm font-semibold text-purple-700">
+                AI Match Score: {candidate.ai_score ?? 0}/100
+              </p>
+              <p className="text-sm text-purple-600 mt-1">
+                {candidate.ai_summary || "No AI summary available"}
+              </p>
+            </div>
 
             {candidate.linkedin_url && (
               <a
