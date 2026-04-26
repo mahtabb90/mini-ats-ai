@@ -4,22 +4,173 @@ A modern fullstack Applicant Tracking System built with React, Supabase, and app
 
 ---
 
-## ✨ Features
+## ✨ Overview
 
-- 🔐 Authentication with Supabase  
-- 💼 Job management system  
-- 👤 Candidate profiles (LinkedIn, CV summary)  
-- 📊 Kanban recruitment pipeline  
-- 🔎 Filtering (by job & candidate name)  
-- 🤖 AI match scoring (MVP)  
-- 👑 Admin panel (create users securely)  
-- ☁️ Cloud-ready architecture  
+Mini ATS is a lightweight recruitment platform designed to manage the entire hiring workflow — from job creation to candidate evaluation.
+
+This project demonstrates:
+- Fullstack system design
+- Product thinking
+- Applied AI (MVP)
+- Secure backend architecture
 
 ---
 
-## 🏗️ Architecture
+## 🎯 Features
 
-React → Supabase (Auth + DB) → Edge Functions → AI Scoring Logic
+### 🔐 Authentication
+- Secure login using Supabase Auth
+- Role-based access (Admin / Customer)
+
+### 💼 Job Management
+- Create and manage job listings
+- Store job descriptions for candidate matching
+
+### 👤 Candidate Management
+- Add candidates with:
+  - Full name
+  - Email
+  - LinkedIn profile
+  - Notes (CV summary)
+- Link candidates to jobs
+
+### 📊 Kanban Pipeline
+- Visual recruitment workflow:
+  - Applied
+  - Interview
+  - Offer
+  - Rejected
+- Update candidate status dynamically
+- Clean and compact layout
+
+### 🔎 Filtering
+- Filter candidates by:
+  - Name
+  - Job
+- Available directly in Kanban view
+
+### 🤖 AI Candidate Scoring (MVP)
+A rule-based AI system that compares:
+- Job description
+- Candidate notes
+
+Outputs:
+- Match score (0–100)
+- Summary of matched skills
+
+- Frontend: https://mini-ats-ai.onrender.com
+- Backend: Supabase  
+
+### 👑 Admin Panel
+- Create real user accounts (admin & customer)
+- Uses secure Supabase Edge Function
+- Automatically creates:
+  - Authentication user
+  - Profile record
+
+---
+
+## 🧠 AI Approach
+
+git clone https://github.com/mahtabb90/mini-ats-ai.git 
+cd mini-ats  
+
+**Current implementation:**
+- Keyword matching
+- Score + summary
+
+**Future improvements:**
+- LLM-based CV analysis (OpenAI / Claude)
+- Skill extraction from full CVs
+- Embedding-based matching
+- Learning from historical hiring data
+
+---
+
+## 🏗️ Tech Stack
+
+VITE_SUPABASE_URL=https://zehszxnlgrwcpenevxoe.supabase.co 
+VITE_SUPABASE_ANON_KEY=sb_publishable_whOFmSqOuBPclrMGV2cI0Q_aZMgvT-U 
+
+**Backend**
+- Supabase (PostgreSQL)
+- Supabase Authentication
+- Supabase Edge Functions
+
+**AI**
+- Custom JavaScript scoring logic
+
+---
+
+## 🧱 Architecture
+
+React (Frontend)
+↓
+Supabase Auth
+↓
+Database (Jobs, Candidates, Profiles)
+↓
+Edge Functions (Admin actions)
+↓
+AI Scoring (client-side MVP)
+
+---
+
+## 🔐 Security
+
+- Admin operations handled via Edge Functions
+- service_role key never exposed in frontend
+- Role-based logic via profiles table
+
+---
+
+## ⚙️ Setup
+
+### 1. Clone repository
+git clone https://github.com/mahtabb90/mini-ats-ai.git  
+cd mini-ats
+
+### 2. Install dependencies
+npm install
+
+### 3. Create .env file
+VITE_SUPABASE_URL=https://zehszxnlgrwcpenevxoe.supabase.co
+VITE_SUPABASE_ANON_KEY=sb_publishable_whOFmSqOuBPclrMGV2cI0Q_aZMgvT-U
+
+### 4. Run app
+npm run dev
+
+---
+
+## 🧪 Demo Credentials
+
+Admin:
+Email: mahtab@test.com  
+Password: Test12345! 
+
+Customer:
+Email: customer@test.com  
+Password: Test12345!  
+
+---
+
+## 📦 MVP Assumptions
+
+- Admin creates user accounts
+- Customers use the same interface
+- AI scoring is simplified (rule-based)
+- No CV file upload (text-based only)
+- Single-tenant system
+
+---
+
+## 🚀 Future Improvements
+
+- Drag & drop Kanban
+- CV upload & parsing
+- LLM integration
+- Multi-tenant support
+- Analytics dashboard
 
 ---
 
@@ -30,115 +181,11 @@ React → Supabase (Auth + DB) → Edge Functions → AI Scoring Logic
 
 ---
 
-## ⚙️ Local Setup
-
-### 1. Clone repository
-
-git clone https://github.com/mahtabb90/mini-ats-ai.git 
-cd mini-ats  
-
-### 2. Install dependencies
-
-npm install  
-
-### 3. Environment variables
-
-Create a `.env` file in the root:
-
-VITE_SUPABASE_URL=https://zehszxnlgrwcpenevxoe.supabase.co 
-VITE_SUPABASE_ANON_KEY=sb_publishable_whOFmSqOuBPclrMGV2cI0Q_aZMgvT-U 
-
-### 4. Run application
-
-npm run dev  
-
----
-
-## 🧠 AI Scoring (MVP)
-
-Simple rule-based AI system:
-
-- Compares job description with candidate notes  
-- Extracts matching keywords  
-- Generates:
-  - Score (0–100)
-  - Matched skills summary  
-
-Example:
-
-AI Score: 24/100  
-Matched skills: react, ai  
-
----
-
-## 📊 Kanban Workflow
-
-- Applied  
-- Interview  
-- Offer  
-- Rejected  
-
-✔ Clean visual pipeline  
-✔ Status dropdown per candidate  
-✔ Real-time updates via Supabase  
-
----
-
-## 👤 Admin Panel
-
-- Create users (admin & customer)  
-- Uses Supabase Edge Functions  
-- Secure (service_role key hidden)  
-
----
-
-## 🔐 Security
-
-- No service_role key exposed in frontend  
-- Edge Functions handle sensitive logic  
-- Role-based access via profiles table  
-
----
-
-## 📦 MVP Assumptions
-
-- Admin creates accounts  
-- Customers use same interface  
-- AI is rule-based (not ML yet)  
-- No CV upload (text-based only)  
-- Single-tenant system  
-
----
-
-## 🚀 Future Improvements
-
-- Drag & drop Kanban  
-- CV parsing (PDF)  
-- LLM integration (OpenAI / Claude)  
-- Skill extraction & embeddings  
-- Multi-tenant support  
-- Analytics dashboard  
-
----
-
-## 🎬 Demo
-
-Demo video includes:
-
-- Login  
-- Job creation  
-- Candidate management  
-- Kanban workflow  
-- AI scoring  
-- Admin panel  
-
----
-
 ## 👩‍💻 Author
 
-**Mahtab Nezam**  
+Mahtab Nezam  
 AI Developer Student  
-Fullstack + Applied AI focus  
+Focused on fullstack + applied AI systems
 
 ---
 
