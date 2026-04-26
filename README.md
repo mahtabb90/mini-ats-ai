@@ -58,9 +58,8 @@ Outputs:
 - Match score (0–100)
 - Summary of matched skills
 
-Example:
-AI Score: 24/100  
-Matched skills: react, ai
+- Frontend: https://mini-ats-ai.onrender.com
+- Backend: Supabase  
 
 ### 👑 Admin Panel
 - Create real user accounts (admin & customer)
@@ -73,7 +72,8 @@ Matched skills: react, ai
 
 ## 🧠 AI Approach
 
-This project uses a rule-based AI scoring system as an MVP.
+git clone https://github.com/mahtabb90/mini-ats-ai.git 
+cd mini-ats  
 
 **Current implementation:**
 - Keyword matching
@@ -89,10 +89,8 @@ This project uses a rule-based AI scoring system as an MVP.
 
 ## 🏗️ Tech Stack
 
-**Frontend**
-- React (Vite)
-- Tailwind CSS
-- React Router
+VITE_SUPABASE_URL=https://zehszxnlgrwcpenevxoe.supabase.co 
+VITE_SUPABASE_ANON_KEY=sb_publishable_whOFmSqOuBPclrMGV2cI0Q_aZMgvT-U 
 
 **Backend**
 - Supabase (PostgreSQL)
