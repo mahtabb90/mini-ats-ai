@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function DashboardPage({ session }) {
   const cards = [
     {
@@ -34,9 +36,9 @@ export default function DashboardPage({ session }) {
 
       <div className="grid gap-6 md:grid-cols-3">
         {cards.map((card) => (
-          <a
+          <Link
             key={card.title}
-            href={card.href}
+            to={card.href}
             className="group bg-white rounded-3xl p-6 shadow-md border border-gray-100 hover:-translate-y-1 hover:shadow-xl transition"
           >
             <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-2xl mb-5">
@@ -50,7 +52,7 @@ export default function DashboardPage({ session }) {
             <p className="text-gray-500 mt-2 leading-relaxed">
               {card.description}
             </p>
-          </a>
+          </Link>
         ))}
       </div>
     </div>
