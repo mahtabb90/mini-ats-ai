@@ -129,15 +129,15 @@ AI Scoring (client-side MVP)
 ## ⚙️ Setup
 
 ### 1. Clone repository
-git clone https://github.com/your-username/mini-ats.git  
+git clone https://github.com/mahtabb90/mini-ats-ai.git  
 cd mini-ats
 
 ### 2. Install dependencies
 npm install
 
 ### 3. Create .env file
-VITE_SUPABASE_URL=your_project_url  
-VITE_SUPABASE_ANON_KEY=your_anon_key
+VITE_SUPABASE_URL=https://zehszxnlgrwcpenevxoe.supabase.co
+VITE_SUPABASE_ANON_KEY=sb_publishable_whOFmSqOuBPclrMGV2cI0Q_aZMgvT-U
 
 ### 4. Run app
 npm run dev
@@ -148,11 +148,11 @@ npm run dev
 
 Admin:
 Email: mahtab@test.com  
-Password: ********  
+Password: Test12345! 
 
 Customer:
 Email: customer@test.com  
-Password: ********  
+Password: Test12345!  
 
 ---
 
@@ -176,15 +176,10 @@ Password: ********
 
 ---
 
-## 🎬 Demo
+## 🌍 Live Demo
 
-The demo video includes:
-- Login
-- Job creation
-- Candidate management
-- Kanban workflow
-- AI scoring
-- Admin panel
+- Frontend: https://mini-ats-ai.onrender.com
+- Backend: Supabase  
 
 ---
 
