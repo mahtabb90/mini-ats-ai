@@ -16,6 +16,21 @@ export default function JobsPage({ session }) {
     if (!error) setJobs(data);
   };
 
+  const deleteJob = async (jobId) => {
+  const { error } = await supabase
+    .from("jobs")
+    .delete()
+    .eq("id", jobId);
+
+  if (error) {
+    console.error("Error deleting job:", error.message);
+    alert("Could not delete job");
+    return;
+  }
+
+  setJobs((prevJobs) => prevJobs.filter((job) => job.id !== jobId));
+};
+
   const handleCreateJob = async (e) => {
     e.preventDefault();
 
@@ -103,6 +118,15 @@ export default function JobsPage({ session }) {
               <p className="text-gray-600 mt-3 leading-relaxed">
                 {job.description}
               </p>
+
+       <div className="mt-4 flex justify-end">
+  <button
+    onClick={() => deleteJob(job.id)}
+    className="inline-flex items-center rounded-md border border-red-300 bg-white px-3 py-1.5 text-sm font-medium text-red-500 hover:bg-red-50 hover:text-red-600 transition"
+  >
+    Delete
+  </button>
+</div>
             </div>
           ))}
         </div>
